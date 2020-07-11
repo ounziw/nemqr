@@ -1,0 +1,14 @@
+{
+  "name": "nemqr",
+  "version": "1.0.0",
+  "description": "nemqr",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build"
+  },
+  "author": "ounziw",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@wordpress/scripts": "12.1.0"
+  }
+}
