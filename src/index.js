@@ -3,6 +3,9 @@ import { registerBlockType } from '@wordpress/blocks';
 import { TextControl } from '@wordpress/components';
 import { RangeControl } from '@wordpress/components';
 
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody } from '@wordpress/components';
+
 registerBlockType( 'nemqr/nemqr', {
     title: 'NEM QR Code',
     icon: 'tickets-alt',
@@ -41,30 +44,38 @@ registerBlockType( 'nemqr/nemqr', {
         } = props;
         return (
             <>
-        <TextControl
+            <InspectorControls>
+            <PanelBody
+        title={ __( 'Image size', 'nemqr' ) }
+    >
+    <RangeControl
+        label={__('Image size (100 -300)','nemqr')}
+        onChange={(number)=>{setAttributes({imgsize:number})}}
+        value={parseInt(imgsize)}
+        min={100}
+        max={300}
+        step={5}
+            ></RangeControl>
+            </PanelBody>
+            </InspectorControls>
+            <TextControl
         value={ content }
         label={ __(
             'Nem Address',
             'nemqr'
     ) }
         onChange={(newText)=>setAttributes({content: newText})}
-        ></TextControl>
+    ></TextControl>
         <RangeControl
-        label={__('xem amount(1 -100)','nemqr')}
+        label={__('xem amount (0.1 -100)','nemqr')}
         onChange={(number)=>{setAttributes({xem:number})}}
-        value={parseInt(xem)}
-        min={1}
+        value={parseFloat(xem)}
+        min={0.1}
         max={100}
-        ></RangeControl>
-            <RangeControl
-        label={__('Image size(100 -300)','nemqr')}
-        onChange={(number)=>{setAttributes({imgsize:number})}}
-        value={parseInt(imgsize)}
-        min={100}
-        max={300}
+        step={0.1}
             ></RangeControl>
             </>
-            );
+    );
     },
     save: ( props ) => {
         const {
